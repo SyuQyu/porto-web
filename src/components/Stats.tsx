@@ -32,7 +32,6 @@ export function Stats() {
   const stats = [
     { label: "Completed Projects", value: 154, suffix: "+" },
     { label: "Happy Clients", value: 98, suffix: "%" },
-    { label: "Awards Won", value: 12, suffix: "" },
     { label: "Years Experience", value: 6, suffix: "+" },
   ];
 
@@ -40,7 +39,7 @@ export function Stats() {
     <section id="stats" className="py-20 bg-secondary/30 border-y border-border/50 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
           {stats.map((stat, idx) => (
             <motion.div 
               key={idx}

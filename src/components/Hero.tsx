@@ -64,18 +64,7 @@ export function Hero() {
               </Link>
             </motion.div>
             
-            {/* Quick Stats or Trust Indicators in Hero */}
-            <motion.div variants={itemVariants} className="flex items-center gap-8 pt-8 mt-4 border-t border-border/50 w-full max-w-md">
-              <div className="flex flex-col">
-                <span className="text-3xl font-heading font-bold text-foreground">150+</span>
-                <span className="text-sm text-muted-foreground">Successful Projects</span>
-              </div>
-              <div className="w-px h-12 bg-border/50" />
-              <div className="flex flex-col">
-                <span className="text-3xl font-heading font-bold text-foreground">99%</span>
-                <span className="text-sm text-muted-foreground">Client Satisfaction</span>
-              </div>
-            </motion.div>
+
           </motion.div>
 
           {/* Visual/3D Element Representation */}

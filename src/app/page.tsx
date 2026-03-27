@@ -6,6 +6,7 @@ import { Portfolio } from "@/components/Portfolio";
 import { Pricing } from "@/components/Pricing";
 import { Footer } from "@/components/Footer";
 import { ClientCarousel } from "@/components/ClientCarousel";
+import { Contact } from "@/components/Contact";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Stats />
       <Portfolio />
       <Pricing />
+      <Contact />
       <Footer />
     </main>
   );

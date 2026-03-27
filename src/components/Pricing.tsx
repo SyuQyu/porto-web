@@ -26,7 +26,6 @@ const tiers = [
       "Premium UI/UX Design",
       "CMS (Admin Dashboard)",
       "Advanced SEO Setup",
-      "Free Domain & Hosting (1 Yr)",
       "Priority Maintenance",
       "3 Months Free Support"
     ],
