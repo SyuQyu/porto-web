@@ -44,7 +44,7 @@ export function About() {
               We translate your vision into digital reality.
             </h3>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Based in the digital frontier, Nero Agency has been delivering exceptional software solutions since 2018. We believe in writing clean code, designing intuitive interfaces, and building products that drive real business value.
+              Based in the digital frontier, Kyreon has been delivering exceptional software solutions since 2018. We believe in writing clean code, designing intuitive interfaces, and building products that drive real business value.
             </p>
             
             <ul className="space-y-4 pt-4">

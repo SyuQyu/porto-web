@@ -43,12 +43,12 @@ export function Hero() {
             <motion.div variants={itemVariants}>
               <Badge variant="secondary" className="px-4 py-1.5 rounded-full border-primary/20 bg-primary/10 text-primary flex items-center gap-2">
                 <Zap className="w-4 h-4" />
-                <span>Next-Gen App & Web Agency</span>
+                <span>Web & App Developer · Indonesia</span>
               </Badge>
             </motion.div>
             
             <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-heading font-extrabold tracking-tight leading-[1.1]">
-              We craft <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-400">digital experiences</span> that inspire.
+              We craft <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-indigo-400">digital experiences</span> that convert.
             </motion.h1>
             
             <motion.p variants={itemVariants} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">

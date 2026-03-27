@@ -41,7 +41,7 @@ export function Navbar() {
             <Rocket className="w-8 h-8 text-primary" />
           </motion.div>
           <span className="text-xl font-heading font-bold tracking-tight">
-            Nero
+            Kyreon
           </span>
         </Link>
 
