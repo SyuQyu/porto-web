@@ -33,6 +33,20 @@ const services = [
       "Research-backed interfaces and reusable design systems that keep your product consistent as it grows.",
     tags: ["Design", "Prototyping", "Systems"],
   },
+  {
+    index: "05",
+    title: "AI SEO & Generative Engine Optimization",
+    description:
+      "Get found by AI, not just Google. We optimize your content and schema to be cited in ChatGPT, Perplexity, and Google AI Overviews.",
+    tags: ["GEO", "LLM", "Schema"],
+  },
+  {
+    index: "06",
+    title: "AI Projects & Automation",
+    description:
+      "Custom AI features built into your product — chatbots, RAG assistants, and workflow automation powered by the latest language models.",
+    tags: ["LLM", "RAG", "Agents"],
+  },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
