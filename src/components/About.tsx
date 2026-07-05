@@ -1,88 +1,97 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, Code, Layers, Layout, Smartphone } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+
+const services = [
+  {
+    index: "01",
+    title: "Websites & Landing Pages",
+    description:
+      "Marketing sites, company profiles, and landing pages that load fast, rank well, and turn visitors into customers.",
+    tags: ["Next.js", "SEO", "CMS"],
+  },
+  {
+    index: "02",
+    title: "Web Applications",
+    description:
+      "Dashboards, internal tools, and SaaS platforms built on scalable architecture with clean, maintainable code.",
+    tags: ["React", "APIs", "Auth"],
+  },
+  {
+    index: "03",
+    title: "Mobile Products",
+    description:
+      "Cross-platform mobile apps that feel native — from prototype to store launch and beyond.",
+    tags: ["React Native", "iOS", "Android"],
+  },
+  {
+    index: "04",
+    title: "UI/UX & Design Systems",
+    description:
+      "Research-backed interfaces and reusable design systems that keep your product consistent as it grows.",
+    tags: ["Design", "Prototyping", "Systems"],
+  },
+];
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export function About() {
-  const features = [
-    {
-      title: "Custom Web Applications",
-      description: "Scalable, high-performance web apps tailored to your business needs.",
-      icon: <Layout className="w-6 h-6 text-primary" />
-    },
-    {
-      title: "Mobile App Development",
-      description: "Native and cross-platform mobile experiences that users love.",
-      icon: <Smartphone className="w-6 h-6 text-indigo-400" />
-    },
-    {
-      title: "UI/UX & Design Systems",
-      description: "Beautiful, conversion-optimized interfaces that reflect your brand.",
-      icon: <Layers className="w-6 h-6 text-pink-400" />
-    },
-    {
-      title: "API & Backend Systems",
-      description: "Robust architectures and secure APIs to power your digital ecosystem.",
-      icon: <Code className="w-6 h-6 text-emerald-400" />
-    }
-  ];
-
   return (
-    <section id="about" className="py-24 bg-background relative z-10">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row gap-16 items-center">
-          
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="flex-1 space-y-6"
-          >
-            <h2 className="text-sm font-semibold text-primary uppercase tracking-wider">About Our Agency</h2>
-            <h3 className="text-4xl md:text-5xl font-heading font-bold text-foreground">
-              We translate your vision into digital reality.
-            </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Based in the digital frontier, Kyreon has been delivering exceptional software solutions since 2018. We believe in writing clean code, designing intuitive interfaces, and building products that drive real business value.
+    <section id="services" className="scroll-mt-24 bg-background py-24 md:py-32">
+      <div className="container-editorial">
+        {/* Section head */}
+        <div className="flex flex-col justify-between gap-8 border-b border-border pb-10 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <p className="eyebrow">
+              <span className="font-mono text-brand">§</span> Services
             </p>
-            
-            <ul className="space-y-4 pt-4">
-              {["Agile & Transparent Process", "Senior Engineering Team", "Post-Launch Support & Maintenance", "Focused on ROI & Performance"].map((item, i) => (
-                <motion.li 
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="flex items-center gap-3 text-foreground font-medium"
-                >
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  {item}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
-            {features.map((feature, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-card border border-border/50 p-6 rounded-2xl hover:border-primary/50 transition-colors shadow-sm group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-background border border-border/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  {feature.icon}
-                </div>
-                <h4 className="text-xl font-heading font-semibold mb-2">{feature.title}</h4>
-                <p className="text-muted-foreground text-sm">{feature.description}</p>
-              </motion.div>
-            ))}
+            <h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
+              Everything you need to go from idea to shipped.
+            </h2>
           </div>
+          <Link
+            href="#contact"
+            className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-foreground"
+          >
+            <span className="border-b border-brand pb-0.5">Discuss your project</span>
+            <ArrowUpRight className="h-4 w-4 text-brand transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+        </div>
 
+        {/* Service rows */}
+        <div className="divide-y divide-border">
+          {services.map((s, i) => (
+            <motion.div
+              key={s.index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease, delay: i * 0.05 }}
+              className="group grid grid-cols-1 gap-4 py-8 md:grid-cols-12 md:items-baseline md:gap-8 md:py-10"
+            >
+              <span className="font-mono text-sm text-muted-foreground md:col-span-1">
+                {s.index}
+              </span>
+              <h3 className="font-display text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-brand md:col-span-4 md:text-3xl">
+                {s.title}
+              </h3>
+              <p className="max-w-xl text-muted-foreground md:col-span-5">
+                {s.description}
+              </p>
+              <div className="flex flex-wrap gap-2 md:col-span-2 md:justify-end">
+                {s.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

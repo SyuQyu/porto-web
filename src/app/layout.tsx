@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
@@ -7,11 +7,19 @@ import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-display",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-mono-ui",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kyreon.space";
@@ -19,26 +27,29 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kyreon.space";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Pandu Utomo | Web & App Developer – Indonesia",
-    template: "%s | Pandu Utomo",
+    default: "Kyreon — Web & Product Studio building high-performance sites & apps",
+    template: "%s | Kyreon Studio",
   },
   description:
-    "Professional web and mobile app developer based in Indonesia. Specializing in Next.js, React, UI/UX design, and scalable software solutions for businesses of all sizes.",
+    "Kyreon is an independent web & product studio. We design and build fast, conversion-focused websites, web apps, and mobile products with Next.js, React, and thoughtful UI/UX — for startups and companies worldwide.",
+  applicationName: "Kyreon Studio",
   keywords: [
-    "web developer Indonesia",
-    "jasa pembuatan website",
-    "jasa website profesional",
-    "Next.js developer Indonesia",
-    "React developer",
-    "mobile app developer",
-    "UI UX design",
-    "jasa pembuatan aplikasi",
-    "freelance web developer",
-    "Pandu Utomo",
+    "web design studio",
+    "web development agency",
+    "Next.js development",
+    "React development",
+    "product design studio",
+    "UI UX design agency",
+    "custom web application development",
+    "mobile app development",
+    "jasa pembuatan website profesional",
+    "SEO optimization",
+    "Kyreon",
   ],
-  authors: [{ name: "Pandu Utomo", url: BASE_URL }],
-  creator: "Pandu Utomo",
-  publisher: "Pandu Utomo",
+  category: "technology",
+  authors: [{ name: "Kyreon Studio", url: BASE_URL }],
+  creator: "Kyreon Studio",
+  publisher: "Kyreon Studio",
   robots: {
     index: true,
     follow: true,
@@ -54,46 +65,57 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   openGraph: {
-    title: "Pandu Utomo | Web & App Developer – Indonesia",
+    title: "Kyreon — Web & Product Studio",
     description:
-      "Professional web and mobile app developer based in Indonesia. Specializing in Next.js, React, UI/UX design, and scalable software solutions.",
+      "An independent studio designing and building fast, conversion-focused websites, web apps, and mobile products.",
     url: BASE_URL,
-    siteName: "Pandu Utomo Portfolio",
+    siteName: "Kyreon Studio",
     images: [
       {
-        url: "/og.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Pandu Utomo – Web & App Developer",
+        alt: "Kyreon — Web & Product Studio",
       },
     ],
-    locale: "id_ID",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pandu Utomo | Web & App Developer – Indonesia",
+    title: "Kyreon — Web & Product Studio",
     description:
-      "Professional web and mobile app developer. Next.js, React, UI/UX & mobile solutions.",
-    images: ["/og.png"],
+      "We design and build fast, conversion-focused websites, web apps, and mobile products.",
+    images: ["/opengraph-image"],
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Pandu Utomo",
+  "@type": "ProfessionalService",
+  name: "Kyreon Studio",
   url: BASE_URL,
+  image: `${BASE_URL}/opengraph-image`,
   email: "pandu.utomo.2002@gmail.com",
   telephone: "+6282137138687",
-  jobTitle: "Web & Mobile App Developer",
   description:
-    "Professional web and mobile app developer based in Indonesia, specializing in Next.js, React, and modern software solutions.",
+    "Independent web & product studio designing and building high-performance websites, web apps, and mobile products with Next.js and React.",
+  priceRange: "$$",
+  areaServed: "Worldwide",
+  knowsAbout: [
+    "Web Development",
+    "Web Application Development",
+    "Mobile App Development",
+    "UI/UX Design",
+    "SEO",
+    "Next.js",
+    "React",
+  ],
   address: {
     "@type": "PostalAddress",
     addressCountry: "ID",
   },
-  sameAs: [],
+  sameAs: ["https://github.com/SyuQyu"],
 };
 
 export default function RootLayout({
@@ -103,8 +125,8 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="id"
-      className={`${inter.variable} ${outfit.variable} antialiased h-full`}
+      lang="en"
+      className={`${inter.variable} ${bricolage.variable} ${jetbrains.variable} antialiased h-full`}
       suppressHydrationWarning
     >
       <head>
@@ -116,7 +138,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground scroll-smooth">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
@@ -127,4 +149,3 @@ export default function RootLayout({
     </html>
   );
 }
-

@@ -1,110 +1,125 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-export const alt = "Pandu Utomo – Web & App Developer";
+export const alt = "Kyreon — Web & Product Studio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// Editorial OG card — warm paper, ink type, one signal-orange accent.
 export default async function Image() {
+  const paper = "#F8FAFC";
+  const ink = "#131722";
+  const orange = "#2F6BF6"; // electric blue accent
+  const gray = "#63697A";
+
   return new ImageResponse(
     (
       <div
         style={{
-          background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)",
           width: "100%",
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
+          background: paper,
+          padding: "72px",
           fontFamily: "sans-serif",
-          padding: "60px",
         }}
       >
-        {/* Glow effects */}
+        {/* Top row: wordmark + meta */}
         <div
           style={{
-            position: "absolute",
-            top: "0",
-            left: "0",
-            right: "0",
-            bottom: "0",
-            background: "radial-gradient(circle at 30% 50%, rgba(99,102,241,0.25) 0%, transparent 60%)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: "0",
-            left: "0",
-            right: "0",
-            bottom: "0",
-            background: "radial-gradient(circle at 70% 50%, rgba(79,70,229,0.15) 0%, transparent 60%)",
-          }}
-        />
-
-        {/* Badge */}
-        <div
-          style={{
-            background: "rgba(99,102,241,0.15)",
-            border: "1px solid rgba(99,102,241,0.4)",
-            borderRadius: "999px",
-            padding: "8px 24px",
-            color: "#a5b4fc",
-            fontSize: "18px",
-            fontWeight: 600,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            marginBottom: "32px",
             display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
           }}
         >
-          Web & App Developer · Indonesia
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <div
+              style={{
+                width: "20px",
+                height: "20px",
+                background: orange,
+                borderRadius: "4px",
+                display: "flex",
+              }}
+            />
+            <span
+              style={{
+                fontSize: "30px",
+                fontWeight: 800,
+                color: ink,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Kyreon
+            </span>
+          </div>
+          <span
+            style={{
+              fontSize: "20px",
+              color: gray,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              display: "flex",
+            }}
+          >
+            Web &amp; Product Studio
+          </span>
         </div>
 
-        {/* Name */}
+        {/* Headline */}
         <div
           style={{
-            fontSize: "80px",
-            fontWeight: 800,
-            color: "#f8fafc",
-            letterSpacing: "-0.02em",
-            lineHeight: 1.1,
-            textAlign: "center",
             display: "flex",
-            marginBottom: "24px",
+            flexDirection: "column",
+            gap: "8px",
           }}
         >
-          Pandu Utomo
+          <div
+            style={{
+              fontSize: "84px",
+              fontWeight: 800,
+              color: ink,
+              letterSpacing: "-0.035em",
+              lineHeight: 1.02,
+              display: "flex",
+            }}
+          >
+            We design &amp; build
+          </div>
+          <div
+            style={{
+              fontSize: "84px",
+              fontWeight: 800,
+              letterSpacing: "-0.035em",
+              lineHeight: 1.02,
+              display: "flex",
+              color: ink,
+            }}
+          >
+            products that{" "}
+            <span style={{ color: orange, marginLeft: "20px" }}>convert.</span>
+          </div>
         </div>
 
-        {/* Tagline */}
+        {/* Bottom row */}
         <div
           style={{
-            fontSize: "28px",
-            color: "#94a3b8",
-            textAlign: "center",
-            maxWidth: "700px",
             display: "flex",
-            lineHeight: 1.5,
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+            borderTop: `1px solid #E2E6EE`,
+            paddingTop: "28px",
           }}
         >
-          Crafting high-performance web & mobile experiences
-        </div>
-
-        {/* Contact line */}
-        <div
-          style={{
-            marginTop: "48px",
-            display: "flex",
-            gap: "32px",
-            fontSize: "18px",
-            color: "#64748b",
-          }}
-        >
-          <span>pandu.utomo.2002@gmail.com</span>
-          <span>·</span>
-          <span>+62 821 3713 8687</span>
+          <span style={{ fontSize: "24px", color: gray, display: "flex" }}>
+            Next.js · React · UI/UX · Mobile
+          </span>
+          <span style={{ fontSize: "24px", color: ink, display: "flex", fontWeight: 600 }}>
+            kyreon.space
+          </span>
         </div>
       </div>
     ),

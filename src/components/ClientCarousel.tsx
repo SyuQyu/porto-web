@@ -1,50 +1,38 @@
 "use client";
 
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { useRef } from "react";
-
 const clients = [
-  { name: "Patra Logistik" },
-  { name: "CrescentRating & HalalTrip" },
-  { name: "Eesel" },
-  { name: "MudahDigital" },
-  { name: "PT Mitra Kawan Bersama (MKB)" },
-  { name: "PT Mega Nusa Indonesia" },
-  { name: "PT Implementasi Teknologi Indonesia" }
+  "Patra Logistik",
+  "CrescentRating",
+  "HalalTrip",
+  "MudahDigital",
+  "Mitra Kawan Bersama",
+  "Mega Nusa Indonesia",
+  "Implementasi Teknologi Indonesia",
+  "WeCare",
 ];
 
 export function ClientCarousel() {
-  const plugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  );
+  const row = [...clients, ...clients];
 
   return (
-    <section className="py-20 bg-background overflow-hidden border-t border-border/30 shadow-inner">
-      <div className="container mx-auto px-6 md:px-12 text-center">
-        <p className="text-sm font-semibold text-primary/80 uppercase tracking-widest mb-12">
-          Trusted by industry
+    <section className="border-y border-border bg-card py-10">
+      <div className="container-editorial mb-8">
+        <p className="eyebrow">
+          <span className="h-px w-8 bg-brand" />
+          Trusted by teams &amp; brands we&apos;ve shipped for
         </p>
-        
-        <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <Carousel
-            plugins={[plugin.current]}
-            className="w-full max-w-full mx-auto"
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-          >
-            <CarouselContent className="-ml-2 md:-ml-4 flex items-center">
-              {clients.map((client, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/2 md:basis-1/4 lg:basis-[15%]">
-                  <div className="flex items-center justify-center p-6 h-20 grayscale hover:grayscale-0 opacity-40 hover:opacity-100 transition-all duration-500 bg-secondary/50 rounded-2xl border border-border/50 hover:border-primary/50 shadow-sm cursor-pointer hover:-translate-y-1">
-                    <span className="font-heading font-extrabold text-xl text-foreground/80 hover:text-foreground tracking-tight">{client.name}</span>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+      </div>
+
+      <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div className="marquee-track flex w-max items-center gap-12 pr-12">
+          {row.map((name, i) => (
+            <div key={i} className="flex items-center gap-12">
+              <span className="whitespace-nowrap font-display text-2xl font-bold tracking-tight text-foreground/45 transition-colors hover:text-foreground md:text-3xl">
+                {name}
+              </span>
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand/70" />
+            </div>
+          ))}
         </div>
       </div>
     </section>

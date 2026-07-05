@@ -3,75 +3,104 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Search, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const allProjects = [
+type Project = {
+  title: string;
+  category: string;
+  image: string;
+  url: string;
+  year: string;
+  tags: string[];
+  featured: boolean;
+};
+
+const allProjects: Project[] = [
   {
-    title: "Ngawi Teknik",
-    category: "Corporate Site",
-    image: "/projects/ngawi-teknik.png",
-    tags: ["React", "TailwindCSS"],
+    title: "CrescentRating SIT",
+    category: "Data Platform",
+    image: "/projects/crescentrating.png",
+    url: "https://sit.crescentrating.com/",
+    year: "2025",
+    tags: ["Next.js", "Analytics", "Dashboard"],
     featured: true,
   },
   {
-    title: "Company Profile MNI",
-    category: "Landing Page",
-    image: "/projects/mni.png",
-    tags: ["Next.js", "Framer Motion"],
+    title: "Patra Logistik OILS",
+    category: "Enterprise System",
+    image: "/projects/oils.png",
+    url: "https://oils.patralogistik.com/",
+    year: "2024",
+    tags: ["React", "Logistics", "Java"],
     featured: true,
   },
   {
-    title: "Asco Dewi Sartika",
-    category: "Business Profile",
-    image: "/projects/asco.png",
-    tags: ["HTML", "CSS", "JS"],
+    title: "Workfrom",
+    category: "Web App",
+    image: "/projects/workfrom.png",
+    url: "https://workfrom-fe.vercel.app/",
+    year: "2024",
+    tags: ["React", "Tailwind", "Vite"],
     featured: true,
   },
   {
     title: "WeCare MentalCare",
     category: "Healthcare Platform",
     image: "/projects/wecare.png",
+    url: "https://wecare-mentalcare.netlify.app/",
+    year: "2023",
     tags: ["Vue", "Node.js"],
     featured: true,
+  },
+  {
+    title: "Company Profile MNI",
+    category: "Corporate Site",
+    image: "/projects/mni.png",
+    url: "https://company-profile-mni.vercel.app/",
+    year: "2025",
+    tags: ["Next.js", "Framer Motion"],
+    featured: false,
+  },
+  {
+    title: "Ngawi Teknik",
+    category: "Corporate Site",
+    image: "/projects/ngawi-teknik.png",
+    url: "https://ngawi-teknik.netlify.app/",
+    year: "2024",
+    tags: ["React", "TailwindCSS"],
+    featured: false,
   },
   {
     title: "Mitra Kawan Bersama",
     category: "Corporate Site",
     image: "/projects/mitra.png",
+    url: "https://www.mitrakawanbersama.com/",
+    year: "2023",
     tags: ["WordPress", "SEO"],
-    featured: false,
-  },
-  {
-    title: "Workfrom",
-    category: "Web App",
-    image: "/projects/workfrom.png",
-    tags: ["React", "Tailwind", "Vite"],
-    featured: false,
-  },
-  {
-    title: "CrescentRating SIT",
-    category: "Dashboard",
-    image: "/projects/crescentrating.png",
-    tags: ["Next.js", "Data Analytics"],
     featured: false,
   },
   {
     title: "Mudah Digital",
     category: "Marketing Page",
     image: "/projects/mudahdigital.png",
+    url: "http://mudahdigital.id/",
+    year: "2023",
     tags: ["React", "SEO"],
     featured: false,
   },
   {
-    title: "Patra Logistik OILS",
-    category: "Enterprise System",
-    image: "/projects/oils.png",
-    tags: ["Java", "React", "Logistics"],
+    title: "Asco Dewi Sartika",
+    category: "Business Profile",
+    image: "/projects/asco.png",
+    url: "https://asco-dewi-sartika.netlify.app/",
+    year: "2022",
+    tags: ["HTML", "CSS", "JS"],
     featured: false,
-  }
+  },
 ];
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Portfolio() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -79,13 +108,15 @@ export function Portfolio() {
   const [currentPage, setCurrentPage] = useState(1);
   const PROJECTS_PER_PAGE = 6;
 
-  const featuredProjects = allProjects.filter(p => p.featured);
+  const featuredProjects = allProjects.filter((p) => p.featured);
 
   const filteredProjects = useMemo(() => {
-    return allProjects.filter(p => 
-      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()))
+    const q = searchQuery.toLowerCase();
+    return allProjects.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.tags.some((t) => t.toLowerCase().includes(q))
     );
   }, [searchQuery]);
 
@@ -95,231 +126,206 @@ export function Portfolio() {
     currentPage * PROJECTS_PER_PAGE
   );
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery]);
+  useEffect(() => setCurrentPage(1), [searchQuery]);
 
   useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => { document.body.style.overflow = "auto"; };
+    document.body.style.overflow = isModalOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isModalOpen]);
 
   return (
-    <section id="portfolio" className="py-24 bg-background">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl"
-          >
-            <h2 className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Our Work</h2>
-            <h3 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4">
-              Featured Client Projects
-            </h3>
-            <p className="text-muted-foreground text-lg">
-              Explore some of the award-winning web and mobile applications we've built for ambitious companies worldwide.
+    <section id="work" className="scroll-mt-24 bg-background py-24 md:py-32">
+      <div className="container-editorial">
+        {/* Head */}
+        <div className="flex flex-col justify-between gap-8 border-b border-border pb-10 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <p className="eyebrow">
+              <span className="font-mono text-brand">§</span> Selected work
             </p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            <h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
+              Recent projects, shipped &amp; live.
+            </h2>
+          </div>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-foreground"
           >
-             <button 
-                onClick={() => setIsModalOpen(true)}
-                className="hidden md:inline-flex items-center gap-2 text-primary font-medium hover:underline underline-offset-4 cursor-pointer"
-             >
-                View all projects <ArrowUpRight className="w-4 h-4" />
-             </button>
-          </motion.div>
+            <span className="border-b border-brand pb-0.5">
+              Browse full archive ({allProjects.length})
+            </span>
+            <ArrowUpRight className="h-4 w-4 text-brand transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </button>
         </div>
 
-        {/* Featured Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        {/* Featured grid */}
+        <div className="grid grid-cols-1 gap-x-8 gap-y-14 pt-14 md:grid-cols-2">
           {featuredProjects.map((project, idx) => (
-            <motion.div
-              key={idx}
+            <motion.a
+              key={project.title}
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="group cursor-pointer"
-              onClick={() => setIsModalOpen(true)}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease, delay: (idx % 2) * 0.1 }}
+              className="group block"
             >
-              <div className="relative overflow-hidden rounded-2xl aspect-[4/3] mb-6 shadow-md border border-border/20">
-                <div className="absolute inset-0 bg-secondary/80 mix-blend-multiply group-hover:bg-transparent transition-all duration-700 z-10" />
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out" 
+              <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border bg-secondary">
+                <img
+                  src={project.image}
+                  alt={`${project.title} — ${project.category}`}
+                  loading="lazy"
+                  className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                 />
-                <div className="absolute top-4 left-4 z-20">
-                  <Badge className="bg-background/90 text-foreground backdrop-blur-md hover:bg-background/90 shadow-sm border-0">
-                    {project.category}
-                  </Badge>
-                </div>
-                <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-lg">
-                    <ArrowUpRight className="w-6 h-6" />
-                  </div>
+                <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/5" />
+                <div className="absolute right-4 top-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-background text-foreground opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <ArrowUpRight className="h-5 w-5" />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2">
-                <h4 className="text-2xl font-bold font-heading group-hover:text-primary transition-colors">
-                  {project.title}
-                </h4>
-                <div className="flex gap-2 flex-wrap mt-2">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground border border-border/50">
-                      {tag}
-                    </span>
-                  ))}
+              <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-border pt-4">
+                <div>
+                  <h3 className="font-display text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-brand">
+                    {project.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {project.category}
+                  </p>
                 </div>
+                <span className="shrink-0 font-mono text-xs text-muted-foreground">
+                  {project.year}
+                </span>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
-        </div>
-        
-        <div className="mt-12 text-center block md:hidden">
-            <button 
-              onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-2 text-primary font-medium hover:underline underline-offset-4 cursor-pointer"
-            >
-              View all projects <ArrowUpRight className="w-4 h-4" />
-            </button>
         </div>
       </div>
 
-      {/* Fullscreen Animated Modal */}
+      {/* Archive modal */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
-            initial={{ opacity: 0, y: "100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[100] bg-background flex flex-col overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[100] flex flex-col bg-background"
           >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 md:px-12 border-b border-border/50 bg-background/80 backdrop-blur-md z-10 sticky top-0">
-              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
-                All Projects
-              </h2>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="rounded-full w-10 h-10 hover:bg-muted"
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background/90 px-6 py-5 backdrop-blur-md md:px-10">
+              <div className="flex items-baseline gap-3">
+                <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+                  Project Archive
+                </h2>
+                <span className="font-mono text-xs text-muted-foreground">
+                  {filteredProjects.length} results
+                </span>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-10 w-10 rounded-full"
                 onClick={() => setIsModalOpen(false)}
               >
-                <X className="w-6 h-6" />
+                <X className="h-5 w-5" />
               </Button>
             </div>
 
-            {/* Modal Body */}
-            <div className="flex-1 overflow-y-auto w-full">
-              <div className="max-w-7xl mx-auto p-6 md:p-12">
-                
-                {/* Search Bar */}
-                <div className="relative mb-10 max-w-md mx-auto md:mx-0">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input 
+            <div className="flex-1 overflow-y-auto">
+              <div className="container-editorial py-10">
+                <div className="relative mb-10 max-w-md">
+                  <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
                     type="text"
-                    placeholder="Search projects, tags, or categories..."
+                    placeholder="Search by name, category, or tech…"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 h-12 rounded-full bg-secondary/50 border-border/50 focus-visible:ring-primary w-full text-base"
+                    className="h-12 w-full rounded-full border-border bg-card pl-11 text-base focus-visible:ring-brand"
                   />
                 </div>
 
-                {/* Projects Grid */}
                 {filteredProjects.length === 0 ? (
-                  <div className="text-center py-20">
-                    <p className="text-lg text-muted-foreground">No projects found matching "{searchQuery}"</p>
+                  <div className="py-24 text-center text-muted-foreground">
+                    No projects match &ldquo;{searchQuery}&rdquo;.
                   </div>
                 ) : (
-                  <motion.div 
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                      visible: { transition: { staggerChildren: 0.1 } }
-                    }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                  >
-                    {currentProjects.map((project, idx) => (
-                      <motion.div
-                        key={`${project.title}-${idx}`}
-                        variants={{
-                          hidden: { opacity: 0, scale: 0.95 },
-                          visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } }
-                        }}
-                        className="group flex flex-col bg-card rounded-2xl overflow-hidden border border-border/50 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
+                  <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {currentProjects.map((project) => (
+                      <a
+                        key={project.title}
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-foreground/30"
                       >
-                        <div className="relative aspect-video overflow-hidden">
-                          <img 
-                            src={project.image} 
-                            alt={project.title} 
-                            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                        <div className="relative aspect-video overflow-hidden bg-secondary">
+                          <img
+                            src={project.image}
+                            alt={`${project.title} — ${project.category}`}
+                            loading="lazy"
+                            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                           />
-                          <Badge className="absolute top-3 left-3 bg-background/90 text-foreground backdrop-blur-md shadow-sm border-0">
-                            {project.category}
-                          </Badge>
+                          <div className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-background text-foreground opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+                            <ArrowUpRight className="h-4 w-4" />
+                          </div>
                         </div>
-                        <div className="p-5 flex flex-col flex-1">
-                          <h4 className="text-xl font-bold font-heading mb-3 text-foreground group-hover:text-primary transition-colors">
+                        <div className="flex flex-1 flex-col p-5">
+                          <div className="flex items-center justify-between">
+                            <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                              {project.category}
+                            </span>
+                            <span className="font-mono text-[11px] text-muted-foreground">
+                              {project.year}
+                            </span>
+                          </div>
+                          <h3 className="mt-2 font-display text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-brand">
                             {project.title}
-                          </h4>
-                          <div className="flex gap-2 flex-wrap mt-auto">
-                            {project.tags.map(tag => (
-                              <span key={tag} className="px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-md bg-secondary text-secondary-foreground border border-border/30">
-                                {tag}
+                          </h3>
+                          <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
+                            {project.tags.map((t) => (
+                              <span
+                                key={t}
+                                className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
+                              >
+                                {t}
                               </span>
                             ))}
                           </div>
                         </div>
-                      </motion.div>
+                      </a>
                     ))}
-                  </motion.div>
+                  </div>
                 )}
 
-                {/* Pagination Controls */}
                 {totalPages > 1 && (
-                  <div className="mt-16 flex items-center justify-center gap-4">
+                  <div className="mt-14 flex items-center justify-center gap-4">
                     <Button
                       variant="outline"
                       size="icon"
-                      className="rounded-full w-10 h-10 border-border/50 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-foreground disabled:hover:border-border/50"
-                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      className="h-10 w-10 rounded-full"
+                      onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                       disabled={currentPage === 1}
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="h-5 w-5" />
                     </Button>
-                    
-                    <div className="text-sm font-medium text-muted-foreground w-24 text-center">
-                      Page {currentPage} of {totalPages}
-                    </div>
-
+                    <span className="w-24 text-center font-mono text-xs text-muted-foreground">
+                      {currentPage} / {totalPages}
+                    </span>
                     <Button
                       variant="outline"
                       size="icon"
-                      className="rounded-full w-10 h-10 border-border/50 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-foreground disabled:hover:border-border/50"
-                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                      className="h-10 w-10 rounded-full"
+                      onClick={() =>
+                        setCurrentPage((p) => Math.min(p + 1, totalPages))
+                      }
                       disabled={currentPage === totalPages}
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="h-5 w-5" />
                     </Button>
                   </div>
                 )}
-                
               </div>
             </div>
           </motion.div>

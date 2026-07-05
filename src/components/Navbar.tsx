@@ -3,106 +3,114 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Rocket } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+
+const navLinks = [
+  { name: "Services", href: "#services", index: "01" },
+  { name: "Work", href: "#work", index: "02" },
+  { name: "Studio", href: "#studio", index: "03" },
+  { name: "Pricing", href: "#pricing", index: "04" },
+];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "About", href: "#about" },
-    { name: "Stats", href: "#stats" },
-    { name: "Pricing", href: "#pricing" },
-  ];
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border/50 py-3"
-          : "bg-transparent py-5"
+          ? "border-b border-border bg-background/85 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <motion.div
-            whileHover={{ rotate: 15 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <Rocket className="w-8 h-8 text-primary" />
-          </motion.div>
-          <span className="text-xl font-heading font-bold tracking-tight">
+      <div className="container-editorial flex h-16 items-center justify-between md:h-18">
+        {/* Wordmark */}
+        <Link href="/" className="group flex items-center gap-2.5" aria-label="Kyreon home">
+          <span className="block h-3.5 w-3.5 rounded-[3px] bg-brand transition-transform duration-300 group-hover:rotate-45" />
+          <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
             Kyreon
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-9 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+              className="group flex items-center gap-1.5 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
+              <span className="font-mono text-[10px] text-muted-foreground group-hover:text-brand">
+                {link.index}
+              </span>
               {link.name}
             </Link>
           ))}
-          <Link
-            href="#contact"
-            className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:brightness-110 transition-all hover:scale-105 active:scale-95"
-          >
-            Get in touch
-          </Link>
-          <ThemeToggle />
         </nav>
 
-        {/* Mobile Toggle */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex items-center gap-2">
           <ThemeToggle />
-          <button
-            className="text-foreground p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          <Link
+            href="#contact"
+            className="group hidden items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 active:translate-y-0 md:inline-flex"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            Start a project
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+
+          {/* Mobile toggle */}
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground md:hidden"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile nav */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-xl md:hidden flex flex-col items-center py-6 gap-6"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden border-t border-border bg-background md:hidden"
           >
-            {navLinks.map((link) => (
+            <nav className="container-editorial flex flex-col py-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between border-b border-border/60 py-4 text-lg font-medium text-foreground last:border-0"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="font-mono text-xs text-muted-foreground">{link.index}</span>
+                    {link.name}
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
+                </Link>
+              ))}
               <Link
-                key={link.name}
-                href={link.href}
+                href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground"
               >
-                {link.name}
+                Start a project <ArrowUpRight className="h-4 w-4" />
               </Link>
-            ))}
-            <Link
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-8 py-3 w-4/5 text-center mt-4 rounded-full bg-primary text-primary-foreground font-medium text-lg"
-            >
-              Get in touch
-            </Link>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

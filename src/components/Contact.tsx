@@ -1,155 +1,133 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, Phone, Send } from "lucide-react";
+import { Mail, MessageSquare, Send, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
+const EMAIL = "pandu.utomo.2002@gmail.com";
+const WA_NUMBER = "6282137138687";
+const WA_DISPLAY = "+62 821 3713 8687";
+
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = `Project Inquiry from ${formData.name}`;
-    const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-    window.location.href = `mailto:pandu.utomo.2002@gmail.com?subject=${subject}&body=${body}`;
+    const subject = encodeURIComponent(
+      `New project inquiry — ${formData.name || "Kyreon"}`
+    );
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+    );
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
-    <section id="contact" className="py-24 bg-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-      <div className="absolute top-1/4 -right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-1/4 -left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px] -z-10" />
-
-      <div className="container mx-auto px-6 md:px-12 relative z-10 max-w-6xl">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
+    <section id="contact" className="scroll-mt-24 border-t border-border bg-card py-24 md:py-32">
+      <div className="container-editorial">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
+          {/* Left: pitch + channels */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-sm font-semibold text-primary uppercase tracking-wider mb-2"
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5"
           >
-            Get In Touch
-          </motion.h2>
-          <motion.h3 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4"
-          >
-            Let's discuss your project
-          </motion.h3>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground text-lg"
-          >
-            Ready to start your digital transformation? Fill out the form or reach out via WhatsApp.
-          </motion.p>
-        </div>
+            <p className="eyebrow">
+              <span className="font-mono text-brand">§</span> Contact
+            </p>
+            <h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
+              Let&apos;s build something worth shipping.
+            </h2>
+            <p className="mt-6 max-w-md text-lg text-muted-foreground text-pretty">
+              Tell us about your project and we&apos;ll get back within one
+              business day. Prefer to talk? Reach us directly.
+            </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-          {/* Contact Info */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-2 space-y-8"
-          >
-            <div className="bg-card border border-border/50 rounded-3xl p-8 shadow-xl">
-              <h4 className="text-2xl font-bold font-heading mb-6">Contact Information</h4>
-              
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Email Us</p>
-                    <a href="mailto:pandu.utomo.2002@gmail.com" className="text-foreground hover:text-primary transition-colors font-medium">
-                      pandu.utomo.2002@gmail.com
-                    </a>
-                  </div>
-                </div>
+            <div className="mt-10 space-y-3">
+              <a
+                href={`mailto:${EMAIL}`}
+                className="group flex items-center justify-between rounded-xl border border-border bg-background p-5 transition-colors hover:border-foreground/30"
+              >
+                <span className="flex items-center gap-4">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand/12 text-brand">
+                    <Mail className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                      Email
+                    </span>
+                    <span className="font-medium text-foreground">{EMAIL}</span>
+                  </span>
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-6 h-6 text-green-500" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">WhatsApp</p>
-                    <a 
-                      href="https://wa.me/6282137138687" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="text-foreground hover:text-green-500 transition-colors font-medium block mb-2"
-                    >
-                      +62 821 3713 8687
-                    </a>
-                    <Button 
-                      onClick={() => window.open('https://wa.me/6282137138687', '_blank')}
-                      className="bg-green-500 hover:bg-green-600 text-white rounded-full h-10 px-6 w-full sm:w-auto"
-                    >
-                      Chat on WhatsApp
-                    </Button>
-                  </div>
-                </div>
-              </div>
+              <a
+                href={`https://wa.me/${WA_NUMBER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between rounded-xl border border-border bg-background p-5 transition-colors hover:border-foreground/30"
+              >
+                <span className="flex items-center gap-4">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand/12 text-brand">
+                    <MessageSquare className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                      WhatsApp
+                    </span>
+                    <span className="font-medium text-foreground">{WA_DISPLAY}</span>
+                  </span>
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+          {/* Right: form */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="lg:col-span-3"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="lg:col-span-7"
           >
-            <form onSubmit={handleSubmit} className="bg-card border border-border/50 rounded-3xl p-8 md:p-10 shadow-xl space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-foreground">Full Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-background border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-foreground">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-background border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                    placeholder="john@example.com"
-                  />
-                </div>
+            <form
+              onSubmit={handleSubmit}
+              className="rounded-2xl border border-border bg-background p-7 md:p-10"
+            >
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <Field
+                  label="Full name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Jane Cooper"
+                />
+                <Field
+                  label="Email address"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="jane@company.com"
+                />
               </div>
-              
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
+
+              <div className="mt-6 space-y-2">
+                <label
+                  htmlFor="message"
+                  className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground"
+                >
+                  Project details
+                </label>
                 <textarea
                   id="message"
                   name="message"
@@ -157,19 +135,60 @@ export function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full bg-background border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                  placeholder="Tell us about your project..."
+                  placeholder="What are you building, and what's the timeline?"
+                  className="w-full resize-none rounded-xl border border-border bg-card px-4 py-3 text-foreground outline-none transition-all focus:border-brand focus:ring-2 focus:ring-brand/25"
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full rounded-xl h-14 text-base font-semibold group">
-                Send Message
-                <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              <Button
+                type="submit"
+                size="lg"
+                className="group mt-6 h-13 w-full rounded-full text-base font-semibold"
+              >
+                Send project brief
+                <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
             </form>
           </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+function Field({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+}: {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  type?: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <label
+        htmlFor={name}
+        className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground"
+      >
+        {label}
+      </label>
+      <input
+        id={name}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        required
+        placeholder={placeholder}
+        className="w-full rounded-xl border border-border bg-card px-4 py-3 text-foreground outline-none transition-all focus:border-brand focus:ring-2 focus:ring-brand/25"
+      />
+    </div>
   );
 }

@@ -11,19 +11,19 @@ export function ThemeToggle() {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return <Button variant="ghost" size="icon" className="rounded-full w-10 h-10 border border-border/50 opacity-0" />;
+  if (!mounted) return <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full border border-border opacity-0" />;
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      className="rounded-full w-10 h-10 border border-border/50 hover:bg-muted/50 transition-all bg-background/50 backdrop-blur-md"
+      className="h-10 w-10 rounded-full border border-border text-foreground transition-colors hover:bg-accent"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? (
-        <Sun className="h-5 w-5 text-yellow-500 transition-all scale-100 rotate-0" />
+        <Sun className="h-[18px] w-[18px]" />
       ) : (
-        <Moon className="h-5 w-5 text-indigo-500 transition-all scale-100 rotate-0" />
+        <Moon className="h-[18px] w-[18px]" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>

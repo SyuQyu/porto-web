@@ -1,131 +1,155 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Check, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 const tiers = [
   {
     name: "UMKM",
-    price: "From Rp. 100k",
-    description: "The most affordable package strictly designed to help local businesses grow and go digital.",
+    price: "Rp 100k",
+    priceNote: "starting from",
+    description:
+      "For local businesses ready to go digital with a clean, fast presence.",
     features: [
-      "Custom Landing Page",
-      "Mobile Responsive View",
-      "Basic On-Page SEO",
-      "WhatsApp Contact Integration",
-      "1 Month Free Support"
+      "Custom landing page",
+      "Fully responsive",
+      "Basic on-page SEO",
+      "WhatsApp integration",
+      "1 month free support",
     ],
     popular: false,
   },
   {
     name: "Company",
-    price: "From Rp. 2000k",
-    description: "Professional multi-page websites designed to elevate your company's credibility and corporate brand.",
+    price: "Rp 2jt",
+    priceNote: "starting from",
+    description:
+      "Professional multi-page sites that build credibility for your brand.",
     features: [
-      "Premium UI/UX Design",
-      "CMS (Admin Dashboard)",
-      "Advanced SEO Setup",
-      "Priority Maintenance",
-      "3 Months Free Support"
+      "Premium UI/UX design",
+      "CMS / admin dashboard",
+      "Advanced SEO setup",
+      "Priority maintenance",
+      "3 months free support",
     ],
     popular: true,
   },
   {
     name: "Custom",
-    price: "From Rp. 10000k",
-    description: "Complex software solutions, web applications, or custom mobile apps tailored strictly to your needs.",
+    price: "Rp 10jt",
+    priceNote: "starting from",
+    description:
+      "Complex web & mobile applications engineered around your workflow.",
     features: [
-      "Custom Web or Mobile App",
-      "Scalable Backend Architecture",
-      "Payment Gateway Integration",
-      "Third-party API Integrations",
-      "Dedicated Project Manager",
-      "24/7 SLA Support"
+      "Custom web or mobile app",
+      "Scalable backend architecture",
+      "Payment gateway integration",
+      "Third-party API integrations",
+      "Dedicated project manager",
     ],
     popular: false,
-  }
+  },
 ];
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-24 bg-card relative">
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-sm font-semibold text-primary uppercase tracking-wider mb-2"
-          >
-            Transparent Pricing
-          </motion.h2>
-          <motion.h3 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4"
-          >
-            Invest in your digital growth
-          </motion.h3>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground text-lg"
-          >
-            We don't just build apps; we build businesses. Choose a package that fits your objectives.
-          </motion.p>
+    <section id="pricing" className="scroll-mt-24 bg-background py-24 md:py-32">
+      <div className="container-editorial">
+        <div className="max-w-2xl border-b border-border pb-10">
+          <p className="eyebrow">
+            <span className="font-mono text-brand">§</span> Pricing
+          </p>
+          <h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
+            Clear packages. No surprises.
+          </h2>
+          <p className="mt-5 text-lg text-muted-foreground text-pretty">
+            Every engagement is scoped to your goals. These starting points give
+            you a sense of the investment.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 gap-6 pt-14 md:grid-cols-3">
           {tiers.map((tier, idx) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
+              key={tier.name}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.15 }}
-              className={`relative flex flex-col p-8 rounded-3xl border ${
-                tier.popular 
-                  ? "bg-background border-primary shadow-2xl shadow-primary/10 scale-100 md:scale-105 z-10" 
-                  : "bg-background/50 border-border/50"
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, ease, delay: idx * 0.1 }}
+              className={`relative flex flex-col rounded-2xl border p-8 ${
+                tier.popular
+                  ? "border-foreground bg-foreground text-background"
+                  : "border-border bg-card"
               }`}
             >
               {tier.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 text-xs font-bold uppercase tracking-wider rounded-full">
-                  Most Popular
-                </div>
+                <span className="absolute -top-3 left-8 rounded-full bg-brand px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-brand-foreground">
+                  Most chosen
+                </span>
               )}
-              
-              <div className="mb-6">
-                <h4 className="text-2xl font-bold font-heading mb-2">{tier.name}</h4>
-                <p className="text-muted-foreground text-sm h-12">{tier.description}</p>
+
+              <div className="flex items-baseline justify-between">
+                <h3 className="font-display text-2xl font-bold tracking-tight">
+                  {tier.name}
+                </h3>
+                <span
+                  className={`font-mono text-xs ${
+                    tier.popular ? "text-background/60" : "text-muted-foreground"
+                  }`}
+                >
+                  0{idx + 1}
+                </span>
               </div>
-              
-              <div className="mb-8">
-                <span className="text-4xl font-extrabold text-foreground">{tier.price}</span>
+
+              <p
+                className={`mt-3 min-h-12 text-sm ${
+                  tier.popular ? "text-background/70" : "text-muted-foreground"
+                }`}
+              >
+                {tier.description}
+              </p>
+
+              <div className="mt-6 flex items-baseline gap-2 border-t border-current/15 pt-6">
+                <span className="font-display text-4xl font-extrabold tracking-tight">
+                  {tier.price}
+                </span>
+                <span
+                  className={`text-xs ${
+                    tier.popular ? "text-background/60" : "text-muted-foreground"
+                  }`}
+                >
+                  {tier.priceNote}
+                </span>
               </div>
-              
-              <ul className="space-y-4 mb-8 flex-1">
-                {tier.features.map(feature => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-sm font-medium">{feature}</span>
+
+              <ul className="mt-8 flex-1 space-y-3.5">
+                {tier.features.map((f) => (
+                  <li key={f} className="flex items-start gap-3 text-sm">
+                    <Check
+                      className={`mt-0.5 h-4 w-4 shrink-0 ${
+                        tier.popular ? "text-brand" : "text-brand"
+                      }`}
+                      strokeWidth={2.5}
+                    />
+                    <span>{f}</span>
                   </li>
                 ))}
               </ul>
-              
-              <Button 
-                variant={tier.popular ? "default" : "outline"} 
-                className={`w-full h-12 rounded-xl text-base ${
-                  !tier.popular && "border-border hover:bg-secondary/50"
+
+              <Link
+                href="#contact"
+                className={`group mt-8 inline-flex items-center justify-center gap-1.5 rounded-full px-6 py-3.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
+                  tier.popular
+                    ? "bg-background text-foreground"
+                    : "bg-primary text-primary-foreground"
                 }`}
               >
-                Get Started
-              </Button>
+                Get started
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
             </motion.div>
           ))}
         </div>

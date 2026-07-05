@@ -1,63 +1,93 @@
 import Link from "next/link";
-import { Rocket, Twitter, Linkedin, Github } from "lucide-react";
+import { Github, ArrowUpRight } from "lucide-react";
+
+const columns = [
+  {
+    title: "Studio",
+    links: [
+      { name: "Services", href: "#services" },
+      { name: "Selected work", href: "#work" },
+      { name: "About the studio", href: "#studio" },
+      { name: "Pricing", href: "#pricing" },
+    ],
+  },
+  {
+    title: "Capabilities",
+    links: [
+      { name: "Web development", href: "#services" },
+      { name: "Web applications", href: "#services" },
+      { name: "Mobile products", href: "#services" },
+      { name: "UI/UX & SEO", href: "#services" },
+    ],
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-background/50 backdrop-blur-lg">
-      <div className="container mx-auto px-6 md:px-12 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+    <footer className="border-t border-border bg-background">
+      <div className="container-editorial py-16 md:py-20">
+        {/* Big CTA line */}
+        <div className="flex flex-col justify-between gap-8 border-b border-border pb-14 md:flex-row md:items-end">
+          <Link
+            href="#contact"
+            className="group max-w-3xl font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground md:text-5xl"
+          >
+            Have a project in mind?{" "}
+            <span className="text-brand underline decoration-brand/30 decoration-2 underline-offset-8 transition-colors group-hover:decoration-brand">
+              Let&apos;s talk
+            </span>
+            <ArrowUpRight className="ml-2 inline h-8 w-8 align-baseline text-brand transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 md:h-11 md:w-11" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 gap-10 py-14 md:grid-cols-4">
           {/* Brand */}
-          <div className="md:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <Rocket className="w-6 h-6 text-primary" />
-              <span className="text-xl font-heading font-bold tracking-tight">
+          <div className="md:col-span-2">
+            <Link href="/" className="flex items-center gap-2.5">
+              <span className="block h-3.5 w-3.5 rounded-[3px] bg-brand" />
+              <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
                 Kyreon
               </span>
             </Link>
-            <p className="text-muted-foreground text-sm max-w-sm">
-              We craft beautiful, high-performance web and mobile applications that help businesses scale securely and efficiently.
+            <p className="mt-4 max-w-xs text-sm text-muted-foreground text-pretty">
+              An independent web &amp; product studio. We design and build fast,
+              conversion-focused software for teams worldwide.
             </p>
-            <div className="flex gap-4 pt-4">
-              <a href="#" className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all">
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a href="#" className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all">
-                <Github className="w-4 h-4" />
-              </a>
+            <a
+              href="https://github.com/SyuQyu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-foreground hover:text-background"
+              aria-label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+          </div>
+
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h4 className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                {col.title}
+              </h4>
+              <ul className="mt-4 space-y-3">
+                {col.links.map((l) => (
+                  <li key={l.name}>
+                    <Link
+                      href={l.href}
+                      className="text-sm text-foreground/80 transition-colors hover:text-brand"
+                    >
+                      {l.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          {/* Links */}
-          <div className="space-y-4">
-            <h4 className="font-heading font-semibold">Services</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><Link href="#" className="hover:text-primary transition-colors">Web Development</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Mobile Applications</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">UI/UX Design</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">SEO Optimization</Link></li>
-            </ul>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="font-heading font-semibold">Company</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><Link href="#about" className="hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link href="#portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
-              <li><Link href="#pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
-              <li><Link href="#contact" className="hover:text-primary transition-colors">Contact</Link></li>
-            </ul>
-          </div>
+          ))}
         </div>
 
-        <div className="pt-8 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} Kyreon. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link>
-          </div>
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-border pt-8 font-mono text-xs text-muted-foreground md:flex-row">
+          <p>© {new Date().getFullYear()} Kyreon Studio. All rights reserved.</p>
+          <p>Built with Next.js · Designed in-house</p>
         </div>
       </div>
     </footer>
