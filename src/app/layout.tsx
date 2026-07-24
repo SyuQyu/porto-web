@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import {
+  Inter,
+  Bricolage_Grotesque,
+  JetBrains_Mono,
+  Instrument_Serif,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
@@ -22,16 +27,24 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-editorial",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kyreon.space";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Kyreon — Web & Product Studio building high-performance sites & apps",
+    default: "Kyreon · Web & Product Studio building high-performance sites & apps",
     template: "%s | Kyreon Studio",
   },
   description:
-    "Kyreon is an independent web & product studio. We design and build fast, conversion-focused websites, web apps, and mobile products with Next.js, React, and thoughtful UI/UX — for startups and companies worldwide.",
+    "Kyreon is an independent web & product studio. We design and build fast, conversion-focused websites, web apps, and mobile products with Next.js, React, and thoughtful UI/UX, for startups and companies worldwide.",
   applicationName: "Kyreon Studio",
   keywords: [
     "web design studio",
@@ -65,7 +78,7 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   openGraph: {
-    title: "Kyreon — Web & Product Studio",
+    title: "Kyreon · Web & Product Studio",
     description:
       "An independent studio designing and building fast, conversion-focused websites, web apps, and mobile products.",
     url: BASE_URL,
@@ -75,7 +88,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Kyreon — Web & Product Studio",
+        alt: "Kyreon · Web & Product Studio",
       },
     ],
     locale: "en_US",
@@ -83,7 +96,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kyreon — Web & Product Studio",
+    title: "Kyreon · Web & Product Studio",
     description:
       "We design and build fast, conversion-focused websites, web apps, and mobile products.",
     images: ["/opengraph-image"],
@@ -126,7 +139,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${bricolage.variable} ${jetbrains.variable} antialiased h-full`}
+      className={`${inter.variable} ${bricolage.variable} ${jetbrains.variable} ${instrumentSerif.variable} antialiased h-full`}
       suppressHydrationWarning
     >
       <head>

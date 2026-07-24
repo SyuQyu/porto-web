@@ -7,8 +7,8 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
-  { name: "Services", href: "#services", index: "01" },
-  { name: "Work", href: "#work", index: "02" },
+  { name: "Work", href: "#work", index: "01" },
+  { name: "Services", href: "#services", index: "02" },
   { name: "Studio", href: "#studio", index: "03" },
   { name: "Pricing", href: "#pricing", index: "04" },
 ];
@@ -35,8 +35,8 @@ export function Navbar() {
       <div className="container-editorial flex h-16 items-center justify-between md:h-18">
         {/* Wordmark */}
         <Link href="/" className="group flex items-center gap-2.5" aria-label="Kyreon home">
-          <span className="block h-3.5 w-3.5 rounded-[3px] bg-brand transition-transform duration-300 group-hover:rotate-45" />
-          <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
+          <span className="block h-3.5 w-3.5 bg-brand transition-transform duration-300 group-hover:rotate-45" />
+          <span className="font-display text-lg font-bold tracking-tight text-foreground">
             Kyreon
           </span>
         </Link>
@@ -49,7 +49,7 @@ export function Navbar() {
               href={link.href}
               className="group flex items-center gap-1.5 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
-              <span className="font-mono text-[10px] text-muted-foreground group-hover:text-brand">
+              <span className="font-mono text-[10px] text-muted-foreground/70 transition-colors group-hover:text-foreground">
                 {link.index}
               </span>
               {link.name}
@@ -63,8 +63,8 @@ export function Navbar() {
             href="#contact"
             className="group hidden items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 active:translate-y-0 md:inline-flex"
           >
-            Start a project
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            Let&apos;s talk
+            <ArrowUpRight className="h-4 w-4 text-brand transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
 
           {/* Mobile toggle */}
@@ -108,7 +108,7 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground"
               >
-                Start a project <ArrowUpRight className="h-4 w-4" />
+                Let&apos;s talk <ArrowUpRight className="h-4 w-4 text-brand" />
               </Link>
             </nav>
           </motion.div>

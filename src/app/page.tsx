@@ -6,6 +6,7 @@ import { Portfolio } from "@/components/Portfolio";
 import { Pricing } from "@/components/Pricing";
 import { Footer } from "@/components/Footer";
 import { ClientCarousel } from "@/components/ClientCarousel";
+import { Testimonial } from "@/components/Testimonial";
 import { Contact } from "@/components/Contact";
 
 export default function Home() {
@@ -15,9 +16,10 @@ export default function Home() {
       <Hero />
       <ClientCarousel />
       <About />
-      <Stats />
       <Portfolio />
+      <Stats />
       <Pricing />
+      <Testimonial />
       <Contact />
       <Footer />
     </main>

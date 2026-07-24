@@ -60,10 +60,10 @@ export function Pricing() {
       <div className="container-editorial">
         <div className="max-w-2xl border-b border-border pb-10">
           <p className="eyebrow">
-            <span className="font-mono text-brand">§</span> Pricing
+            <span className="eyebrow-num">05</span> Pricing
           </p>
-          <h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
-            Clear packages. No surprises.
+          <h2 className="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
+            Clear packages, no surprises.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground text-pretty">
             Every engagement is scoped to your goals. These starting points give

@@ -23,7 +23,7 @@ const services = [
     index: "03",
     title: "Mobile Products",
     description:
-      "Cross-platform mobile apps that feel native — from prototype to store launch and beyond.",
+      "Cross-platform mobile apps that feel native, from prototype to store launch and beyond.",
     tags: ["React Native", "iOS", "Android"],
   },
   {
@@ -44,7 +44,7 @@ const services = [
     index: "06",
     title: "AI Projects & Automation",
     description:
-      "Custom AI features built into your product — chatbots, RAG assistants, and workflow automation powered by the latest language models.",
+      "Custom AI features built into your product: chatbots, RAG assistants, and workflow automation powered by the latest language models.",
     tags: ["LLM", "RAG", "Agents"],
   },
 ];
@@ -55,22 +55,63 @@ export function About() {
   return (
     <section id="services" className="scroll-mt-24 bg-background py-24 md:py-32">
       <div className="container-editorial">
+        {/* Manifesto */}
+        <div className="border-b border-border pb-16 md:pb-20">
+          <p className="eyebrow">
+            <span className="eyebrow-num">01</span> Why Kyreon
+          </p>
+          <p className="mt-8 max-w-5xl font-display text-3xl font-bold leading-[1.12] tracking-[-0.02em] text-balance text-foreground md:text-[3.25rem]">
+            Great software is{" "}
+            <span className="font-editorial font-normal">invisible.</span> We
+            sweat the architecture, the load times, and the details users never
+            notice, so the moments they do notice feel effortless. Products that
+            don&apos;t just look sharp, they{" "}
+            <span className="mark-accent">perform</span>.
+          </p>
+
+          {/* Stats */}
+          <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-border pt-10 md:mt-16 md:grid-cols-4 md:pt-12">
+            {[
+              { k: "50", d: "Projects shipped" },
+              { k: "4 years", d: "In practice" },
+              { k: "96", d: "Avg. Lighthouse" },
+              { k: "98%", d: "Client satisfaction" },
+            ].map((c, idx) => (
+              <motion.div
+                key={c.d}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, ease, delay: idx * 0.08 }}
+                className="flex flex-col gap-1"
+              >
+                <span className="font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  {c.k}
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                  {c.d}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
         {/* Section head */}
-        <div className="flex flex-col justify-between gap-8 border-b border-border pb-10 md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-8 border-b border-border pb-10 pt-20 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <p className="eyebrow">
-              <span className="font-mono text-brand">§</span> Services
+              <span className="eyebrow-num">02</span> What we do
             </p>
-            <h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
-              Everything you need to go from idea to shipped.
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
+              One team across every layer of the build.
             </h2>
           </div>
           <Link
             href="#contact"
             className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-foreground"
           >
-            <span className="border-b border-brand pb-0.5">Discuss your project</span>
-            <ArrowUpRight className="h-4 w-4 text-brand transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <span className="border-b-2 border-brand pb-0.5">Discuss your project</span>
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
 
@@ -85,7 +126,7 @@ export function About() {
               transition={{ duration: 0.6, ease, delay: i * 0.05 }}
               className="group grid grid-cols-1 gap-4 py-8 md:grid-cols-12 md:items-baseline md:gap-8 md:py-10"
             >
-              <span className="font-mono text-sm text-muted-foreground md:col-span-1">
+              <span className="font-mono text-sm text-muted-foreground/70 md:col-span-1">
                 {s.index}
               </span>
               <h3 className="font-display text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-brand md:col-span-4 md:text-3xl">

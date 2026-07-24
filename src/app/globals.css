@@ -9,9 +9,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-heading: var(--font-display);
+  --font-editorial: var(--font-editorial);
   --font-mono: var(--font-mono-ui);
 
-  /* Editorial brand accent (signal orange) — used sparingly */
+  /* Paper — warm off-white surface, one step down from pure white */
+  --color-paper-2: var(--paper-2);
+
+  /* Signal accent — acid lime. Only ever a fill/highlight, never body text. */
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-muted: var(--brand-muted);
@@ -55,100 +59,105 @@
 }
 
 /* ------------------------------------------------------------------ */
-/*  Editorial / Studio palette — Azure edition                         */
-/*  Paper #F8FAFC  ·  Ink #131722  ·  Electric blue #3B7DFF            */
+/*  Editorial / Studio palette — Narrativ edition                      */
+/*  Paper #FFFFFF · Paper-2 #F7F7F6 · Ink #0E0E0F · Lime #C8FF00        */
+/*  One accent, acid lime, used only as a highlight fill or arrow.      */
 /* ------------------------------------------------------------------ */
 :root {
-  --background: oklch(0.981 0.004 250);  /* cool near-white paper */
-  --foreground: oklch(0.19 0.014 262);   /* cool near-black ink */
+  --background: #ffffff;                  /* pure paper */
+  --foreground: #0e0e0f;                  /* ink */
 
-  --card: oklch(0.995 0.002 250);        /* raised paper */
-  --card-foreground: oklch(0.19 0.014 262);
-  --popover: oklch(0.995 0.002 250);
-  --popover-foreground: oklch(0.19 0.014 262);
+  --paper-2: #f7f7f6;                     /* warm off-white surface */
 
-  --primary: oklch(0.2 0.015 262);       /* ink — solid buttons */
-  --primary-foreground: oklch(0.981 0.004 250);
+  --card: #f7f7f6;                        /* raised paper */
+  --card-foreground: #0e0e0f;
+  --popover: #ffffff;
+  --popover-foreground: #0e0e0f;
 
-  --secondary: oklch(0.945 0.008 250);   /* soft cool gray */
-  --secondary-foreground: oklch(0.25 0.015 262);
+  --primary: #0e0e0f;                     /* ink — solid pill buttons */
+  --primary-foreground: #ffffff;
 
-  --muted: oklch(0.948 0.007 250);
-  --muted-foreground: oklch(0.48 0.02 258);
+  --secondary: #f2f2f0;                   /* soft warm gray */
+  --secondary-foreground: #0e0e0f;
 
-  --accent: oklch(0.93 0.012 252);
-  --accent-foreground: oklch(0.25 0.015 262);
+  --muted: #f2f2f0;
+  --muted-foreground: #5b5b59;            /* editorial grey */
 
-  --brand: oklch(0.56 0.176 254);        /* electric blue (deep for light bg) */
-  --brand-foreground: oklch(0.99 0.005 250);
+  --accent: #efefec;
+  --accent-foreground: #0e0e0f;
+
+  --brand: oklch(0.56 0.176 254);         /* azure 500 — the single accent */
+  --brand-foreground: #ffffff;            /* white sits on azure */
   --brand-muted: oklch(0.93 0.05 252);
 
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.008 252);
-  --input: oklch(0.9 0.008 252);
+  --border: #e6e6e3;                      /* hairline ~ ink/10 */
+  --input: #e6e6e3;
   --ring: oklch(0.56 0.176 254);
 
   --chart-1: oklch(0.56 0.176 254);
-  --chart-2: oklch(0.66 0.15 232);
-  --chart-3: oklch(0.62 0.16 280);
-  --chart-4: oklch(0.7 0.13 210);
-  --chart-5: oklch(0.55 0.15 300);
+  --chart-2: #0e0e0f;
+  --chart-3: oklch(0.66 0.15 232);
+  --chart-4: #5b5b59;
+  --chart-5: oklch(0.62 0.16 280);
 
   --radius: 0.5rem;
 
-  --sidebar: oklch(0.995 0.002 250);
-  --sidebar-foreground: oklch(0.19 0.014 262);
-  --sidebar-primary: oklch(0.2 0.015 262);
-  --sidebar-primary-foreground: oklch(0.981 0.004 250);
-  --sidebar-accent: oklch(0.93 0.012 252);
-  --sidebar-accent-foreground: oklch(0.25 0.015 262);
-  --sidebar-border: oklch(0.9 0.008 252);
-  --sidebar-ring: oklch(0.56 0.176 254);
+  --sidebar: #f7f7f6;
+  --sidebar-foreground: #0e0e0f;
+  --sidebar-primary: #0e0e0f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #efefec;
+  --sidebar-accent-foreground: #0e0e0f;
+  --sidebar-border: #e6e6e3;
+  --sidebar-ring: #0e0e0f;
 }
 
 .dark {
-  --background: oklch(0.17 0.014 262);   /* deep cool slate */
-  --foreground: oklch(0.96 0.005 250);   /* paper */
+  --background: #0e0e0f;                  /* ink */
+  --foreground: #f7f7f6;                  /* paper */
 
-  --card: oklch(0.206 0.016 262);
-  --card-foreground: oklch(0.96 0.005 250);
-  --popover: oklch(0.206 0.016 262);
-  --popover-foreground: oklch(0.96 0.005 250);
+  --paper-2: #161618;
 
-  --primary: oklch(0.96 0.005 250);      /* paper — solid buttons on dark */
-  --primary-foreground: oklch(0.17 0.014 262);
+  --card: #161618;
+  --card-foreground: #f7f7f6;
+  --popover: #161618;
+  --popover-foreground: #f7f7f6;
 
-  --secondary: oklch(0.245 0.016 262);
-  --secondary-foreground: oklch(0.96 0.005 250);
+  --primary: #f7f7f6;                     /* paper — solid buttons on dark */
+  --primary-foreground: #0e0e0f;
 
-  --muted: oklch(0.245 0.016 262);
-  --muted-foreground: oklch(0.7 0.018 255);
+  --secondary: #1c1c1f;
+  --secondary-foreground: #f7f7f6;
 
-  --accent: oklch(0.285 0.02 262);
-  --accent-foreground: oklch(0.96 0.005 250);
+  --muted: #1c1c1f;
+  --muted-foreground: #a1a1a0;
 
-  --brand: oklch(0.72 0.15 252);         /* the electric blue you liked */
-  --brand-foreground: oklch(0.15 0.02 262);
+  --accent: #232326;
+  --accent-foreground: #f7f7f6;
+
+  --brand: oklch(0.72 0.15 252);          /* azure 400 — brighter on ink */
+  --brand-foreground: #0e0e0f;
   --brand-muted: oklch(0.32 0.08 255);
 
   --destructive: oklch(0.62 0.2 25);
-  --border: oklch(0.29 0.016 262);
-  --input: oklch(0.29 0.016 262);
+  --border: #262629;
+  --input: #262629;
   --ring: oklch(0.72 0.15 252);
 
   --chart-1: oklch(0.72 0.15 252);
-  --chart-2: oklch(0.7 0.14 220);
-  --chart-3: oklch(0.68 0.15 285);
-  --chart-4: oklch(0.75 0.12 205);
-  --chart-5: oklch(0.66 0.14 305);
+  --chart-2: #f7f7f6;
+  --chart-3: oklch(0.7 0.14 220);
+  --chart-4: #a1a1a0;
+  --chart-5: oklch(0.68 0.15 285);
 
-  --sidebar: oklch(0.206 0.016 262);
-  --sidebar-foreground: oklch(0.96 0.005 250);
-  --sidebar-primary: oklch(0.96 0.005 250);
-  --sidebar-primary-foreground: oklch(0.17 0.014 262);
-  --sidebar-accent: oklch(0.285 0.02 262);
-  --sidebar-accent-foreground: oklch(0.96 0.005 250);
-  --sidebar-border: oklch(0.29 0.016 262);
+  --sidebar: #161618;
+  --sidebar-foreground: #f7f7f6;
+  --sidebar-primary: #f7f7f6;
+  --sidebar-primary-foreground: #0e0e0f;
+  --sidebar-accent: #232326;
+  --sidebar-accent-foreground: #f7f7f6;
+  --sidebar-border: #262629;
   --sidebar-ring: oklch(0.72 0.15 252);
 }
 
@@ -157,17 +166,18 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground selection:bg-brand/25 selection:text-foreground;
+    @apply bg-background text-foreground;
     font-feature-settings: "ss01", "cv01", "cv11";
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background: color-mix(in oklch, var(--brand) 25%, transparent);
+    background: color-mix(in oklab, var(--brand) 25%, transparent);
+    color: inherit;
   }
   html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in oklch, var(--brand) 55%, var(--border)) transparent;
+    scrollbar-color: var(--foreground) transparent;
   }
   ::-webkit-scrollbar {
     width: 10px;
@@ -177,24 +187,44 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: color-mix(in oklch, var(--brand) 45%, var(--border));
+    background: color-mix(in oklab, var(--foreground) 30%, transparent);
     border: 2px solid var(--background);
     border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--brand);
+    background: var(--foreground);
   }
 }
 
 @layer utilities {
   /* Editorial container with consistent gutters */
   .container-editorial {
-    @apply mx-auto w-full max-w-[80rem] px-6 md:px-10 lg:px-14;
+    @apply mx-auto w-full max-w-[82rem] px-6 md:px-10 lg:px-14;
   }
 
-  /* Section eyebrow / kicker */
+  /* Editorial serif — the italic emphasis voice */
+  .font-editorial {
+    font-family: var(--font-editorial), Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Section eyebrow / kicker — mono, wide-tracked, with a numeral */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground;
+    @apply inline-flex items-center gap-2.5 font-mono text-[11px] font-normal uppercase tracking-[0.2em] text-muted-foreground;
+  }
+  .eyebrow-num {
+    @apply font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground/70;
+  }
+
+  /* Azure highlight behind a keyword — Narrativ-style, brand accent */
+  .mark-accent {
+    background: var(--brand);
+    color: var(--brand-foreground);
+    padding: 0 0.14em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   /* Fine hairline used to separate editorial rows */

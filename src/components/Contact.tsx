@@ -15,7 +15,7 @@ export function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const subject = encodeURIComponent(
-      `New project inquiry — ${formData.name || "Kyreon"}`
+      `New project inquiry from ${formData.name || "Kyreon"}`
     );
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
@@ -40,9 +40,9 @@ export function Contact() {
             className="lg:col-span-5"
           >
             <p className="eyebrow">
-              <span className="font-mono text-brand">§</span> Contact
+              <span className="eyebrow-num">07</span> Contact
             </p>
-            <h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-foreground md:text-6xl text-balance">
               Let&apos;s build something worth shipping.
             </h2>
             <p className="mt-6 max-w-md text-lg text-muted-foreground text-pretty">
